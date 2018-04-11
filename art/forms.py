@@ -25,12 +25,12 @@ class RegisterFormUpdate(ModelForm):
         fields = ['first_name', 'last_name', 'email']
 
 class LoginForm(ModelForm):
-    email = forms.EmailField(label='Votre adresse e-mail', required=True)
+    username = forms.CharField(label='Votre nom utilisateur', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label='Votre mot de passe', required=True)
 
     class Meta:
         model = User
-        fields = [ 'email', 'password']
+        fields = [ 'username', 'password']
 
 class AddAddress(ModelForm):
     class Meta:

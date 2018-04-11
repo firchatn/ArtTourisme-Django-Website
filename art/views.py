@@ -26,9 +26,8 @@ def index(request):
             return redirect('art:index')
         if form2.is_valid() and not form.is_valid():
             print('2')
-            user = authenticate(username=request.POST['email'], password=request.POST['password'])
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
-                print(user)
                 if user.is_active:
                     client = Client.objects.filter(user_id=user.id).first()
                     __move_session_cart_to_database_cart(request, client.id)
