@@ -8,6 +8,7 @@ class RegisterForm(ModelForm):
     first_name = forms.CharField(label='Votre prénom', required=True)
     last_name = forms.CharField(label='Votre nom', required=True)
     email = forms.EmailField(label='Votre adresse e-mail', required=True)
+    password = forms.CharField(widget=forms.PasswordInput, label='Votre mot de passe', required=True)
 
     class Meta:
         model = User
@@ -25,6 +26,7 @@ class RegisterFormUpdate(ModelForm):
 
 class LoginForm(ModelForm):
     email = forms.EmailField(label='Votre adresse e-mail', required=True)
+    password = forms.CharField(widget=forms.PasswordInput, label='Votre mot de passe', required=True)
 
     class Meta:
         model = User

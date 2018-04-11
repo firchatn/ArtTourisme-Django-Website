@@ -1,9 +1,55 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from art.forms import RegisterForm, RegisterFormUpdate, AddAddress, LoginForm
-
+from django.contrib.auth import authenticate, login, logout
+from art.models import *
 
 def index(request):
     form = RegisterForm()
     form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            print('1')
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return redirect('art:index')
+        if form2.is_valid() and not form.is_valid():
+            print('2')
+            user = authenticate(username=request.POST['email'], password=request.POST['password'])
+            if user is not None:
+                print(user)
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return redirect('art:index')
+            else:
+                return redirect('art:error')
 
     return render(request, 'index.html', {'form': form, 'form2' : form2})
+
+def __move_session_cart_to_database_cart(request, client_id):
+    if 'cart' in request.session:
+        for product_id, qty in request.session['cart'].iteritems():
+            if CartLine.objects.filter(product_id=product_id, client_id=client_id).exists():
+                cart_line = CartLine.objects.get(product_id=product_id, client_id=client_id)
+                cart_line.quantity += int(qty)
+            else:
+                cart_line = CartLine(product_id=product_id, client_id=client_id, quantity=qty)
+            cart_line.save()
+        del request.session['cart']
+    return
+
+def error(request):
+    return render(request, 'error.html')
