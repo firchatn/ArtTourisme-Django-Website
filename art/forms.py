@@ -23,6 +23,12 @@ class RegisterFormUpdate(ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email']
 
+class LoginForm(ModelForm):
+    email = forms.EmailField(label='Votre adresse e-mail', required=True)
+
+    class Meta:
+        model = User
+        fields = [ 'email', 'password']
 
 class AddAddress(ModelForm):
     class Meta:
