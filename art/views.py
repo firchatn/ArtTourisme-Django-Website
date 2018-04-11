@@ -10,7 +10,7 @@ def index(request):
         form = RegisterForm(request.POST)
         form2 = LoginForm(request.POST)
         if form.is_valid():
-            print('1')
+            print('1\n')
             # On cree l utilisateur et le client
             user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
                         first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
@@ -23,16 +23,16 @@ def index(request):
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             __move_session_cart_to_database_cart(request, client.id)
             login(request, user)
-            return redirect('art:index')
-        if form2.is_valid() and not form.is_valid():
-            print('2')
+            return render(request, 'index.html')
+        if form2.is_valid():
+            print('2\n')
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
                 if user.is_active:
                     client = Client.objects.filter(user_id=user.id).first()
                     __move_session_cart_to_database_cart(request, client.id)
                     login(request, user)
-                return redirect('art:index')
+                return render(request, 'index.html')
             else:
                 return redirect('art:error')
 
@@ -52,3 +52,7 @@ def __move_session_cart_to_database_cart(request, client_id):
 
 def error(request):
     return render(request, 'error.html')
+
+def logout_view(request):
+    logout(request)
+    return redirect('art:index')
