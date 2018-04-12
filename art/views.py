@@ -120,3 +120,7 @@ def cat_view_ceramique(request):
     cat = Category.objects.filter(name='ceramique')
     product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product})
+
+def produits_view(request):
+    products = Product.objects.all()
+    return render(request, 'produit.html', {'products': products})
