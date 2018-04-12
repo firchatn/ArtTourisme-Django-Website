@@ -59,4 +59,5 @@ def logout_view(request):
     return redirect('art:index')
 
 def produits_view(request):
-    return render(request, 'mens.html')
+    products = Product.objects.select_related('vat').order_by('-id')[:8]
+    return render(request, 'mens.html', {'products': products})
