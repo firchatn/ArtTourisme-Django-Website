@@ -565,7 +565,7 @@ if (typeof jQuery === 'undefined') {
     toggle: true
   }
 
-  Collapse.prototype.dimension = function () {
+  Collapse.prototype.diproduition = function () {
     var hasWidth = this.$element.hasClass('width')
     return hasWidth ? 'width' : 'height'
   }
@@ -590,11 +590,11 @@ if (typeof jQuery === 'undefined') {
       activesData || actives.data('bs.collapse', null)
     }
 
-    var dimension = this.dimension()
+    var diproduition = this.diproduition()
 
     this.$element
       .removeClass('collapse')
-      .addClass('collapsing')[dimension](0)
+      .addClass('collapsing')[diproduition](0)
       .attr('aria-expanded', true)
 
     this.$trigger
@@ -606,7 +606,7 @@ if (typeof jQuery === 'undefined') {
     var complete = function () {
       this.$element
         .removeClass('collapsing')
-        .addClass('collapse in')[dimension]('')
+        .addClass('collapse in')[diproduition]('')
       this.transitioning = 0
       this.$element
         .trigger('shown.bs.collapse')
@@ -614,11 +614,11 @@ if (typeof jQuery === 'undefined') {
 
     if (!$.support.transition) return complete.call(this)
 
-    var scrollSize = $.camelCase(['scroll', dimension].join('-'))
+    var scrollSize = $.camelCase(['scroll', diproduition].join('-'))
 
     this.$element
       .one('bsTransitionEnd', $.proxy(complete, this))
-      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[dimension](this.$element[0][scrollSize])
+      .emulateTransitionEnd(Collapse.TRANSITION_DURATION)[diproduition](this.$element[0][scrollSize])
   }
 
   Collapse.prototype.hide = function () {
@@ -628,9 +628,9 @@ if (typeof jQuery === 'undefined') {
     this.$element.trigger(startEvent)
     if (startEvent.isDefaultPrevented()) return
 
-    var dimension = this.dimension()
+    var diproduition = this.diproduition()
 
-    this.$element[dimension](this.$element[dimension]())[0].offsetHeight
+    this.$element[diproduition](this.$element[diproduition]())[0].offsetHeight
 
     this.$element
       .addClass('collapsing')
@@ -654,7 +654,7 @@ if (typeof jQuery === 'undefined') {
     if (!$.support.transition) return complete.call(this)
 
     this.$element
-      [dimension](0)
+      [diproduition](0)
       .one('bsTransitionEnd', $.proxy(complete, this))
       .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
   }
@@ -1518,9 +1518,9 @@ if (typeof jQuery === 'undefined') {
     this.replaceArrow(arrowDelta, $tip[0][arrowOffsetPosition], isVertical)
   }
 
-  Tooltip.prototype.replaceArrow = function (delta, dimension, isVertical) {
+  Tooltip.prototype.replaceArrow = function (delta, diproduition, isVertical) {
     this.arrow()
-      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / dimension) + '%')
+      .css(isVertical ? 'left' : 'top', 50 * (1 - delta / diproduition) + '%')
       .css(isVertical ? 'top' : 'left', '')
   }
 
@@ -1604,23 +1604,23 @@ if (typeof jQuery === 'undefined') {
     if (!this.$viewport) return delta
 
     var viewportPadding = this.options.viewport && this.options.viewport.padding || 0
-    var viewportDimensions = this.getPosition(this.$viewport)
+    var viewportDiproduitions = this.getPosition(this.$viewport)
 
     if (/right|left/.test(placement)) {
-      var topEdgeOffset    = pos.top - viewportPadding - viewportDimensions.scroll
-      var bottomEdgeOffset = pos.top + viewportPadding - viewportDimensions.scroll + actualHeight
-      if (topEdgeOffset < viewportDimensions.top) { // top overflow
-        delta.top = viewportDimensions.top - topEdgeOffset
-      } else if (bottomEdgeOffset > viewportDimensions.top + viewportDimensions.height) { // bottom overflow
-        delta.top = viewportDimensions.top + viewportDimensions.height - bottomEdgeOffset
+      var topEdgeOffset    = pos.top - viewportPadding - viewportDiproduitions.scroll
+      var bottomEdgeOffset = pos.top + viewportPadding - viewportDiproduitions.scroll + actualHeight
+      if (topEdgeOffset < viewportDiproduitions.top) { // top overflow
+        delta.top = viewportDiproduitions.top - topEdgeOffset
+      } else if (bottomEdgeOffset > viewportDiproduitions.top + viewportDiproduitions.height) { // bottom overflow
+        delta.top = viewportDiproduitions.top + viewportDiproduitions.height - bottomEdgeOffset
       }
     } else {
       var leftEdgeOffset  = pos.left - viewportPadding
       var rightEdgeOffset = pos.left + viewportPadding + actualWidth
-      if (leftEdgeOffset < viewportDimensions.left) { // left overflow
-        delta.left = viewportDimensions.left - leftEdgeOffset
-      } else if (rightEdgeOffset > viewportDimensions.width) { // right overflow
-        delta.left = viewportDimensions.left + viewportDimensions.width - rightEdgeOffset
+      if (leftEdgeOffset < viewportDiproduitions.left) { // left overflow
+        delta.left = viewportDiproduitions.left - leftEdgeOffset
+      } else if (rightEdgeOffset > viewportDiproduitions.width) { // right overflow
+        delta.left = viewportDiproduitions.left + viewportDiproduitions.width - rightEdgeOffset
       }
     }
 

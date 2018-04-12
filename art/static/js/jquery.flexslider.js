@@ -732,7 +732,7 @@
 
         // SLIDE:
         if (!fade) {
-          var dimension = (vertical) ? slider.slides.filter(':first').height() : slider.computedW,
+          var diproduition = (vertical) ? slider.slides.filter(':first').height() : slider.computedW,
               margin, slideString, calcNext;
 
           // INFINITE LOOP / REVERSE:
@@ -742,11 +742,11 @@
             calcNext = ((slider.itemW + margin) * slider.move) * slider.animatingTo;
             slideString = (calcNext > slider.limit && slider.visible !== 1) ? slider.limit : calcNext;
           } else if (slider.currentSlide === 0 && target === slider.count - 1 && slider.vars.animationLoop && slider.direction !== "next") {
-            slideString = (reverse) ? (slider.count + slider.cloneOffset) * dimension : 0;
+            slideString = (reverse) ? (slider.count + slider.cloneOffset) * diproduition : 0;
           } else if (slider.currentSlide === slider.last && target === 0 && slider.vars.animationLoop && slider.direction !== "prev") {
-            slideString = (reverse) ? 0 : (slider.count + 1) * dimension;
+            slideString = (reverse) ? 0 : (slider.count + 1) * diproduition;
           } else {
-            slideString = (reverse) ? ((slider.count - 1) - target + slider.cloneOffset) * dimension : (target + slider.cloneOffset) * dimension;
+            slideString = (reverse) ? ((slider.count - 1) - target + slider.cloneOffset) * diproduition : (target + slider.cloneOffset) * diproduition;
           }
           slider.setProps(slideString, "", slider.vars.animationSpeed);
           if (slider.transitions) {
@@ -759,18 +759,18 @@
             slider.container.unbind("webkitTransitionEnd transitionend");
             slider.container.bind("webkitTransitionEnd transitionend", function() {
               clearTimeout(slider.ensureAnimationEnd);
-              slider.wrapup(dimension);
+              slider.wrapup(diproduition);
             });
 
             // Insurance for the ever-so-fickle transitionEnd event
             clearTimeout(slider.ensureAnimationEnd);
             slider.ensureAnimationEnd = setTimeout(function() {
-              slider.wrapup(dimension);
+              slider.wrapup(diproduition);
             }, slider.vars.animationSpeed + 100);
 
           } else {
             slider.container.animate(slider.args, slider.vars.animationSpeed, slider.vars.easing, function(){
-              slider.wrapup(dimension);
+              slider.wrapup(diproduition);
             });
           }
         } else { // FADE:
@@ -784,20 +784,20 @@
           } else {
             slider.slides.eq(slider.currentSlide).css({ "opacity": 0, "zIndex": 1 });
             slider.slides.eq(target).css({ "opacity": 1, "zIndex": 2 });
-            slider.wrapup(dimension);
+            slider.wrapup(diproduition);
           }
         }
         // SMOOTH HEIGHT:
         if (slider.vars.smoothHeight) { methods.smoothHeight(slider.vars.animationSpeed); }
       }
     };
-    slider.wrapup = function(dimension) {
+    slider.wrapup = function(diproduition) {
       // SLIDE:
       if (!fade && !carousel) {
         if (slider.currentSlide === 0 && slider.animatingTo === slider.last && slider.vars.animationLoop) {
-          slider.setProps(dimension, "jumpEnd");
+          slider.setProps(diproduition, "jumpEnd");
         } else if (slider.currentSlide === slider.last && slider.animatingTo === 0 && slider.vars.animationLoop) {
-          slider.setProps(dimension, "jumpStart");
+          slider.setProps(diproduition, "jumpStart");
         }
       }
       slider.animating = false;
