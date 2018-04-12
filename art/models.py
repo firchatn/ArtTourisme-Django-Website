@@ -130,7 +130,7 @@ class Product(models.Model):
     long_desc = models.TextField(verbose_name="Description longue")
     price = models.FloatField(verbose_name="Prix HT du produit")
     vat = models.ForeignKey(VAT,on_delete=models.CASCADE, verbose_name="Taux de TVA")
-    thumbnail = models.ImageField(verbose_name="Miniature du produit", upload_to='commerce/media', null=True)
+    thumbnail = models.ImageField(verbose_name="Miniature du produit", upload_to='art/media', null=True)
 
     class Meta:
         verbose_name = 'Produit'

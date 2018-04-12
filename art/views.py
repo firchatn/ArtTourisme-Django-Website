@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from art.models import *
 
 def index(request):
+    products = Product.objects.select_related('vat').order_by('-id')[:8]
     form = RegisterForm()
     form2 = LoginForm()
     if request.method == 'POST':
@@ -36,7 +37,7 @@ def index(request):
             else:
                 return redirect('art:error')
 
-    return render(request, 'index.html', {'form': form, 'form2' : form2})
+    return render(request, 'index.html', {'form': form, 'form2' : form2, 'products' : products})
 
 def __move_session_cart_to_database_cart(request, client_id):
     if 'cart' in request.session:
@@ -56,3 +57,6 @@ def error(request):
 def logout_view(request):
     logout(request)
     return redirect('art:index')
+
+def produits_view(request):
+    return render(request, 'mens.html')
