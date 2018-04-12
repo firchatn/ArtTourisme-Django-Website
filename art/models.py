@@ -149,7 +149,7 @@ class Photo(models.Model):
     Les photos permettent d'illustrer les produits afin d'inciter l'internaute à les acheter.
     """
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    photo = models.ImageField(upload_to='commerce/media')
+    photo = models.ImageField(upload_to='art/media')
 
 
 class Order(models.Model):
