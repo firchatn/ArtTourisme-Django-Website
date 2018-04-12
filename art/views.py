@@ -24,7 +24,7 @@ def index(request):
             __move_session_cart_to_database_cart(request, client.id)
             login(request, user)
             return render(request, 'index.html')
-        if form2.is_valid():
+        elif form2.is_valid():
             print('2\n')
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
