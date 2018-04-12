@@ -10,5 +10,22 @@ urlpatterns = [
     url(r'^about$', views.about_view, name='about_view'),
     url(r'^contact$', views.contact_view, name='contact_view'),
     url(r'^event$', views.event_view, name='event_view'),
+    url(r'^produit/tapis/$', views.cat_view_tapis, name='cat_view'),
+    url(r'^produit/habits/$', views.cat_view_habits, name='cat_view'),
+    url(r'^produit/poterie/$', views.cat_view_poterie, name='cat_view'),
+    url(r'^produit/mosaique/$', views.cat_view_mosaique, name='cat_view'),
+    url(r'^produit/bijoux/$', views.cat_view_bijoux, name='cat_view'),
+    url(r'^produit/cuivre/$', views.cat_view_cuivre, name='cat_view'),
+    url(r'^produit/ceramique/$', views.cat_view_ceramique, name='cat_view'),
+    url(r'^produit/tapis/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
+    url(r'^produit/habits/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
+    url(r'^produit/poterie/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
+    url(r'^produit/mosaique/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
+    url(r'^produit/bijoux/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
+    url(r'^produit/cuivre/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
+    url(r'^produit/ceramique/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
     url(r'^produit/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
 ]
+
+
+										

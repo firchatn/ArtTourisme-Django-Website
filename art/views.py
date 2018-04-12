@@ -79,3 +79,45 @@ def single_view(request, id):
     print('i')
     pictures = Photo.objects.filter(product__pk=product.id)
     return render(request, 'single.html', {'product': product, 'pictures': pictures})
+
+def cat_view_tapis(request):
+    cat = Category.objects.filter(name='tapis')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_tapis(request):
+    cat = Category.objects.filter(name='tapis')
+    print(cat)
+    product =Product.objects.filter(category=cat)
+    print(product)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_habits(request):
+    cat = Category.objects.filter(name='habits')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_poterie(request):
+    cat = Category.objects.filter(name='poterie')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_mosaique(request):
+    cat = Category.objects.filter(name='mosaique')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_bijoux(request):
+    cat = Category.objects.filter(name='bijoux')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_cuivre(request):
+    cat = Category.objects.filter(name='cuivre')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
+
+def cat_view_ceramique(request):
+    cat = Category.objects.filter(name='ceramique')
+    product =Product.objects.filter(category=cat)
+    return render(request, 'mens.html', {'product': product})
