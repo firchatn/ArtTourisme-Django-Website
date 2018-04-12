@@ -1,9 +1,4 @@
-<!--
-Author: W3layouts
-Author URL: http://w3layouts.com
-License: Creative Commons Attribution 3.0 Unported
-License URL: http://creativecommons.org/licenses/by/3.0/
--->
+{% load staticfiles %}
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,11 +11,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
 		function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- //tags -->
-<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
-<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
-<link href="css/font-awesome.css" rel="stylesheet"> 
-<link href="css/easy-responsive-tabs.css" rel='stylesheet' type='text/css'/>
-<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" href="{% static 'css/flexslider.css' %}" type="text/css" media="screen" />
+<link href="{% static 'css/font-awesome.css' %}" rel="stylesheet"> 
+<link href="{% static 'css/easy-responsive-tabs.css' %}" rel='stylesheet' type='text/css'/>
+<link href="{% static 'css/style.css' %}" rel="stylesheet" type="text/css" media="all" />
 
 <!-- //for bootstrap working -->
 <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
@@ -332,14 +327,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="flexslider">
 					
 					<ul class="slides">
-						<li data-thumb="images/d2.jpg">
-							<div class="thumb-image"> <img src="images/d2.jpg" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="../../media/{{product.thumbnail}}">
+							<div class="thumb-image"> <img src="../../media/{{product.thumbnail}}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
-						<li data-thumb="images/d1.jpg">
-							<div class="thumb-image"> <img src="images/d1.jpg" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="../../media/{{product.thumbnail}}">
+							<div class="thumb-image"> <img src="../../media/{{product.thumbnail}}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>	
-						<li data-thumb="images/d3.jpg">
-							<div class="thumb-image"> <img src="images/d3.jpg" data-imagezoom="true" class="img-responsive"> </div>
+						<li data-thumb="../../media/{{product.thumbnail}}">
+							<div class="thumb-image"> <img src="../../media/{{product.thumbnail}}" data-imagezoom="true" class="img-responsive"> </div>
 						</li>
 					</ul>
 					<div class="clearfix"></div>
@@ -347,8 +342,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 		</div>
 		<div class="col-md-8 single-right-left simpleCart_shelfItem">
-					<h3>Big Wing Sneakers  (Navy)</h3>
-					<p><span class="item_price">$650</span> <del>- $900</del></p>
+					<h3>{{product}}</h3>
+					<p><span class="item_price">${{product.price}}</span> <del>- $900</del></p>
 					<div class="rating1">
 						<span class="starRating">
 							<input id="rating5" type="radio" name="rating" value="5">
@@ -456,7 +451,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<div class="bootstrap-tab-text-grids">
 									<div class="bootstrap-tab-text-grid">
 										<div class="bootstrap-tab-text-grid-left">
-											<img src="images/t1.jpg" alt=" " class="img-responsive">
+											<img src="../../media/{{product.thumbnail}}" alt=" " class="img-responsive">
 										</div>
 										<div class="bootstrap-tab-text-grid-right">
 											<ul>
@@ -881,12 +876,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //login -->
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!-- js -->
-<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 <!-- //js -->
-<script src="js/modernizr.custom.js"></script>
+<script src="{% static 'js/modernizr.custom.js' %}"></script>
 	<!-- Custom-JavaScript-File-Links --> 
 	<!-- cart-js -->
-	<script src="js/minicart.min.js"></script>
+	<script src="{% static 'js/minicart.min.js' %}"></script>
 <script>
 	// Mini Cart
 	paypal.minicart.render({
@@ -900,10 +895,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 	<!-- //cart-js --> 
 	<!-- single -->
-<script src="js/imagezoom.js"></script>
+<script src="{% static 'js/imagezoom.js' %}"></script>
 <!-- single -->
 <!-- script for responsive tabs -->						
-<script src="js/easy-responsive-tabs.js"></script>
+<script src="{% static 'js/easy-responsive-tabs.js' %}"></script>
 <script>
 	$(document).ready(function () {
 	$('#horizontalTab').easyResponsiveTabs({
@@ -927,7 +922,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	});
 </script>
 <!-- FlexSlider -->
-<script src="js/jquery.flexslider.js"></script>
+<script src="{% static 'js/jquery.flexslider.js' %}"></script>
 						<script>
 						// Can also be used with $(document).ready()
 							$(window).load(function() {
@@ -940,8 +935,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<!-- //FlexSlider-->
 <!-- //script for responsive tabs -->		
 <!-- start-smoth-scrolling -->
-<script type="text/javascript" src="js/move-top.js"></script>
-<script type="text/javascript" src="js/jquery.easing.min.js"></script>
+<script type="text/javascript" src="{% static 'js/move-top.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery.easing.min.js' %}"></script>
 <script type="text/javascript">
 	jQuery(document).ready(function($) {
 		$(".scroll").click(function(event){		
@@ -969,6 +964,6 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //here ends scrolling icon -->
 
 <!-- for bootstrap working -->
-<script type="text/javascript" src="js/bootstrap.js"></script>
+<script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect , get_object_or_404, redirect
 from art.forms import RegisterForm, RegisterFormUpdate, AddAddress, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from art.models import *
@@ -61,3 +61,21 @@ def logout_view(request):
 def produits_view(request):
     products = Product.objects.select_related('vat').order_by('-id')[:8]
     return render(request, 'mens.html', {'products': products})
+
+def contact_view(request):
+    return render(request, 'contact.html')
+
+def tunisie_view(request):
+    return render(request, 'tunisie.html')
+
+def about_view(request):
+    return render(request, 'about.html')
+
+def event_view(request):
+    return render(request, 'event.html')
+
+def single_view(request, id):
+    product = Product.objects.get(id=id)
+    print('i')
+    pictures = Photo.objects.filter(product__pk=product.id)
+    return render(request, 'single.html', {'product': product, 'pictures': pictures})
