@@ -57,68 +57,480 @@ def logout_view(request):
     return redirect('art:index')
 
 def produits_view(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
     products = Product.objects.select_related('vat').order_by('-id')[:8]
-    return render(request, 'produit.html', {'products': products})
+    return render(request, 'produit.html', {'products': products ,'form': form, 'form2' : form2})
 
 def contact_view(request):
-    return render(request, 'contact.html')
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
+    return render(request, 'contact.html', {'form': form, 'form2' : form2})
 
 def tunisie_view(request):
-    return render(request, 'tunisie.html')
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
+    return render(request, 'tunisie.html', {'form': form, 'form2' : form2})
 
 def about_view(request):
-    return render(request, 'about.html')
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
+    return render(request, 'about.html', {'form': form, 'form2' : form2})
 
 def event_view(request):
-    return render(request, 'event.html')
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
+    return render(request, 'event.html', {'form': form, 'form2' : form2})
 
 def single_view(request, id):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     product = Product.objects.get(id=id)
     pictures = Photo.objects.filter(product__pk=product.id)
-    return render(request, 'single.html', {'product': product, 'pictures': pictures})
+    return render(request, 'single.html', {'product': product, 'pictures': pictures , 'form': form, 'form2' : form2})
 
 def cat_view_tapis(request):
-    cat = Category.objects.filter(name='tapis')
-    product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
 
-def cat_view_tapis(request):
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
     cat = Category.objects.filter(name='tapis')
-    print(cat)
     product =Product.objects.filter(category=cat)
-    print(product)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form' : form , 'form2' : form2})
+
 
 def cat_view_habits(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     cat = Category.objects.filter(name='habits')
     product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_poterie(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     cat = Category.objects.filter(name='poterie')
     product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_mosaique(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     cat = Category.objects.filter(name='mosaique')
     product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_bijoux(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     cat = Category.objects.filter(name='bijoux')
     product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_cuivre(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     cat = Category.objects.filter(name='cuivre')
     product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_ceramique(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     cat = Category.objects.filter(name='ceramique')
     product =Product.objects.filter(category=cat)
-    return render(request, 'produit.html', {'product': product})
+    return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def produits_view(request):
+    form = RegisterForm()
+    form2 = LoginForm()
+    if request.method == 'POST':
+        form = RegisterForm(request.POST)
+        form2 = LoginForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le client
+            user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
+                        first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            client = Client(user_id=user.id)
+            client.save()
+
+            # On connecte le client
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
+            __move_session_cart_to_database_cart(request, client.id)
+            login(request, user)
+            return render(request, 'index.html')
+        elif form2.is_valid():
+            user = authenticate(username=request.POST['username'], password=request.POST['password'])
+            if user is not None:
+                if user.is_active:
+                    client = Client.objects.filter(user_id=user.id).first()
+                    __move_session_cart_to_database_cart(request, client.id)
+                    login(request, user)
+                return render(request, 'index.html')
+            else:
+                return redirect('art:error')
+
     products = Product.objects.all()
-    return render(request, 'produit.html', {'products': products})
+    return render(request, 'produit.html', {'products': products, 'form': form, 'form2' : form2})
