@@ -38,17 +38,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</ul>
 	</div>
 </div>
-<!-- header -->
-<div class="header" id="home">
-	<div class="container">
-		<ul>
-		    <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
-			<li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
-			<li><i class="fa fa-phone" aria-hidden="true"></i> Call : 01234567898</li>
-			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">info@example.com</a></li>
-		</ul>
-	</div>
-</div>
+
 <!-- //header -->
 <!-- header-bot -->
 <div class="header-bot">
@@ -643,7 +633,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	// Mini Cart
 	paypal.minicart.render({
 		action: '#'
+		
 	});
+	PAYPAL.apps.MiniCart.bindForm(form);
 
 	if (~window.location.search.indexOf('reset=true')) {
 		paypal.minicart.reset();
