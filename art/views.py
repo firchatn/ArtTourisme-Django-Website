@@ -11,7 +11,6 @@ def index(request):
         form = RegisterForm(request.POST)
         form2 = LoginForm(request.POST)
         if form.is_valid():
-            print('1\n')
             # On cree l utilisateur et le client
             user = User(username=form.cleaned_data['username'], email=form.cleaned_data['email'],
                         first_name=form.cleaned_data['first_name'], last_name=form.cleaned_data['last_name'])
@@ -26,7 +25,6 @@ def index(request):
             login(request, user)
             return render(request, 'index.html')
         elif form2.is_valid():
-            print('2\n')
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
                 if user.is_active:
