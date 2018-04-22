@@ -2,6 +2,20 @@ from django.shortcuts import render, redirect , get_object_or_404, redirect
 from art.forms import RegisterForm, RegisterFormUpdate, AddAddress, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from art.models import *
+from django.views.decorators.csrf import csrf_exempt
+
+
+@csrf_exempt
+def savePanier(request):
+    d = request.POST
+    di = []
+    for key, value in d.items():
+        temp = [key,value]
+        di.append(temp)
+        print(temp)
+        if key.startswith('item_name_'):
+            print(value)
+    return render(request, 'index.html')
 
 def index(request):
     products = Product.objects.select_related('vat').order_by('-id')[:8]

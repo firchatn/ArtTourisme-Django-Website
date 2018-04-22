@@ -47,7 +47,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					<input type="search" name="search" placeholder="Search here..." required="">
 					<input type="submit" value=" ">
 				<div class="clearfix"></div>
-			</form>sub
+			</form>
 		</div>
 		<!-- header-bot -->
 			<div class="col-md-4 logo_agile">
@@ -130,7 +130,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="top_nav_right">
 			<div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-						<form action="#" method="post" class="last"> 
+						<form action="" method="post" class="last"> 
 						<input type="hidden" name="cmd" value="_cart">
 						<input type="hidden" name="display" value="1">
 						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
@@ -493,7 +493,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 																	<input type="hidden" name="currency_code" value="USD" />
 																	<input type="hidden" name="return" value=" " />
 																	<input type="hidden" name="cancel_return" value=" " />
-																	<input type="submit" name="submit" value="Add to cart" class="button" />
+																	<input type="submit" name="submit" value="Add to cart" class="button" />	
 																</fieldset>
 																
 															</form>
@@ -741,6 +741,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 <!-- //login -->
 <a href="#home" class="scroll" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 
+
+
 <!-- js -->
 <script type="text/javascript" src="{% static 'js/jquery-2.1.4.min.js' %}"></script>
 <!-- //js -->
@@ -749,15 +751,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 	<!-- cart-js -->
 	<script src="{% static 'js/minicart.min.js' %}"></script>
 <script>
+	
 	// Mini Cart
+
+
+document.getElementsByClassName("minicart-submit").value= "Hide Filter";
+	//var myTemplate = "<form data-cart-submit='data-cart-submit'> <ul><li><%= config.strings.subtotal %> <%= cart.total({ format: true, showCode: true }) %></li></ul> <button style='left : 100%;'> Send</button type='submit'> {% csrf_token %}{{ form3.as_p }} <input name='element1' hidden='true' value='2'/> <input hidden='true' value='3'/> <button type='reset'> reset </button> <%= config.strings.Produits %> <%= cart.items({ format: true, showCode: true }) %> </form>" ;
 	paypal.minicart.render({
-		action: '#',
-	    strings: {
-        button: "Caisse",
-        buttonAlt: "Total:",
-        discount: "Reduction:"
-    }
+		action: 'savePanier',
+		//template: myTemplate
 	});
+	document.getElementsByClassName("minicart-submit").value= "Hide Filter";
+	
 
 	if (~window.location.search.indexOf('reset=true')) {
 		paypal.minicart.reset();
