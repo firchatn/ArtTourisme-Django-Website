@@ -7,14 +7,25 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def savePanier(request):
+    user = User.objects.get(username='hello')
     d = request.POST
     di = []
     for key, value in d.items():
         temp = [key,value]
         di.append(temp)
-        print(temp)
+        q = 0 
+        c = CartLine()
+        print(key)
+        if key.startswith('quantity_'):
+            q = value
+            
+
         if key.startswith('item_name_'):
-            print(value)
+            #c.client = Client.objects.get(user=user)
+            c.client = Client.objects.get(user=user)
+            c.product = Product.objects.get(name=value)
+            c.quantity = d['quantity_'+ key[-1]]
+            c.save()
     return render(request, 'index.html')
 
 def index(request):
