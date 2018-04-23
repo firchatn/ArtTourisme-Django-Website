@@ -314,7 +314,8 @@ def cat_view_tapis(request):
             else:
                 return redirect('art:error')
     cat = Category.objects.filter(name='tapis')
-    product =Product.objects.filter(category=cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form' : form , 'form2' : form2})
 
 
@@ -350,7 +351,9 @@ def cat_view_habits(request):
                 return redirect('art:error')
 
     cat = Category.objects.filter(name='habits')
-    product =Product.objects.filter(category=cat)
+    print(cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_poterie(request):
@@ -385,7 +388,8 @@ def cat_view_poterie(request):
                 return redirect('art:error')
 
     cat = Category.objects.filter(name='poterie')
-    product =Product.objects.filter(category=cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_mosaique(request):
@@ -420,7 +424,8 @@ def cat_view_mosaique(request):
                 return redirect('art:error')
 
     cat = Category.objects.filter(name='mosaique')
-    product =Product.objects.filter(category=cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_bijoux(request):
@@ -455,7 +460,8 @@ def cat_view_bijoux(request):
                 return redirect('art:error')
 
     cat = Category.objects.filter(name='bijoux')
-    product =Product.objects.filter(category=cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_cuivre(request):
@@ -490,7 +496,8 @@ def cat_view_cuivre(request):
                 return redirect('art:error')
 
     cat = Category.objects.filter(name='cuivre')
-    product =Product.objects.filter(category=cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def cat_view_ceramique(request):
@@ -525,7 +532,8 @@ def cat_view_ceramique(request):
                 return redirect('art:error')
 
     cat = Category.objects.filter(name='ceramique')
-    product =Product.objects.filter(category=cat)
+    product = Product.objects.filter(category=cat[0])
+    #product =Product.objects.filter(category=cat)
     return render(request, 'produit.html', {'product': product, 'form': form, 'form2' : form2})
 
 def produits_view(request):
