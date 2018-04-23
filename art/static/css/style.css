@@ -1424,9 +1424,9 @@ position:relative;
 	opacity: 1 !important;
 	outline:none;
 }
-#PPMiniCart .minicart-submit {
-    /*display: none;*/
-content : "World";
+#PPMiniCart .minicart-submit::after {
+	/*display: none;*/
+	content: "Passer Commande";
 }
 #PPMiniCart .minicart-submit:hover{
 	background:#fe9126 !important;
@@ -5551,3 +5551,4 @@ p.w3ls_para {
     }
 }
 /*-- //responsive media queries --*/
+

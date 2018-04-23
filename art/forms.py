@@ -26,7 +26,7 @@ class RegisterFormUpdate(ModelForm):
 
 class LoginForm(ModelForm):
     username = forms.CharField(label='Votre nom utilisateur', required=True)
-    password = forms.CharField(widget=forms.PasswordInput, label='Votre mot de passe', required=True)
+    password = forms.CharField(widget=forms.PasswordInput, label='Votre mot de passe', required=False)
 
     class Meta:
         model = User

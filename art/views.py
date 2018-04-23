@@ -3,8 +3,9 @@ from art.forms import RegisterForm, RegisterFormUpdate, AddAddress, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from art.models import *
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
 
-
+@login_required(login_url='/errorlogin/')
 @csrf_exempt
 def savePanier(request):
     user = User.objects.get(username='hello')
@@ -49,13 +50,14 @@ def index(request):
             __move_session_cart_to_database_cart(request, client.id)
             login(request, user)
             return render(request, 'index.html')
-        elif form2.is_valid():
+        else:
+            print('oki2')
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
-                if user.is_active:
-                    client = Client.objects.filter(user_id=user.id).first()
-                    __move_session_cart_to_database_cart(request, client.id)
-                    login(request, user)
+                #if user.is_active:
+                client = Client.objects.filter(user_id=user.id).first()
+                __move_session_cart_to_database_cart(request, client.id)
+                login(request, user)
                 return render(request, 'index.html')
             else:
                 return redirect('art:error')
