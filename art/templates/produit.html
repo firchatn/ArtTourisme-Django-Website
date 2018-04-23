@@ -788,7 +788,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			});
 	</script>
 <!-- //here ends scrolling icon -->
-
+<script>
+		$(document).ready(function(){
+			$(".minicart-closer").click(function() {
+					paypal.minicart.reset();
+			});
+	});
+	</script>
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
 </body>
