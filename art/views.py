@@ -5,10 +5,12 @@ from art.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='/errorlogin/')
+
 @csrf_exempt
 def savePanier(request):
     print(request.user.username)
+    if not request.user.username:
+        return redirect('art:error')
     user = User.objects.get(client=request.user.id)
     d = request.POST
     di = []
@@ -20,8 +22,6 @@ def savePanier(request):
         print(key)
         if key.startswith('quantity_'):
             q = value
-            
-
         if key.startswith('item_name_'):
             #c.client = Client.objects.get(user=user)
             c.client = Client.objects.get(user=user)
