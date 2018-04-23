@@ -28,6 +28,9 @@ class Client(models.Model):
     def orders(self):
         return Order.objects.filter(client_id=self.id).order_by('-id')
 
+    def __str__(self):
+        return str(self.user)
+
 
 class Address(models.Model):
     """

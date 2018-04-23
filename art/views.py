@@ -28,7 +28,7 @@ def savePanier(request):
             c.product = Product.objects.get(name=value)
             c.quantity = d['quantity_'+ key[-1]]
             c.save()
-    return render(request, 'index.html')
+    return redirect('art:index')
 
 def index(request):
     products = Product.objects.select_related('vat').order_by('-id')[:8]
@@ -48,18 +48,18 @@ def index(request):
 
             # On connecte le client
             user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
-            __move_session_cart_to_database_cart(request, client.id)
+            #__move_session_cart_to_database_cart(request, client.id)
             login(request, user)
-            return render(request, 'index.html')
+            return render(request, 'index.html', {'products' : products})
         else:
             print('oki2')
             user = authenticate(username=request.POST['username'], password=request.POST['password'])
             if user is not None:
                 #if user.is_active:
                 client = Client.objects.filter(user_id=user.id).first()
-                __move_session_cart_to_database_cart(request, client.id)
+                #__move_session_cart_to_database_cart(request, client.id)
                 login(request, user)
-                return render(request, 'index.html')
+                return render(request, 'index.html' , {'products' : products})
             else:
                 return redirect('art:error')
 

@@ -292,22 +292,23 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<div class="flexslider">
 					
 					<ul class="slides">
-						<li data-thumb="../../media/{{product.thumbnail}}">
-							<div class="thumb-image"> <img src="../../media/{{product.thumbnail}}" data-imagezoom="true" class="img-responsive"> </div>
-						</li>
-						<li data-thumb="../../media/{{product.thumbnail}}">
-							<div class="thumb-image"> <img src="../media/{{product.thumbnail}}" data-imagezoom="true" class="img-responsive"> </div>
-						</li>	
-						<li data-thumb="../../media/{{product.thumbnail}}">
-							<div class="thumb-image"> <img src="{{product.thumbnail}}" data-imagezoom="true" class="img-responsive"> </div>
-						</li>
+							{% for i in pictures %}
+							
+							<li data-thumb="http://127.0.0.1:8000/media/{{i.photo}}">
+								<div class="thumb-image"> <img src="http://127.0.0.1:8000/media/{{i.photo}}" data-imagezoom="true" class="img-responsive"> </div>
+							</li>
+												{% endfor %}
 					</ul>
 					<div class="clearfix"></div>
 				</div>	
 			</div>
 		</div>
 		<div class="col-md-8 single-right-left simpleCart_shelfItem">
-					<h3>{{product}}</h3>
+					<h3>{{product.name}} 
+
+
+
+					</h3>
 					<p><span class="item_price">${{product.price}}</span> <del>- $900</del></p>
 					<div class="rating1">
 						<span class="starRating">
