@@ -8,7 +8,8 @@ from django.contrib.auth.decorators import login_required
 @login_required(login_url='/errorlogin/')
 @csrf_exempt
 def savePanier(request):
-    user = User.objects.get(username='hello')
+    print(request.user.username)
+    user = User.objects.get(client=request.user.id)
     d = request.POST
     di = []
     for key, value in d.items():

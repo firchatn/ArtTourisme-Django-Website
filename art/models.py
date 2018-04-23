@@ -233,8 +233,8 @@ class CartLine(models.Model):
     quantity = models.IntegerField()
 
     class Meta:
-        verbose_name = 'Ligne d\'un panier client'
-        verbose_name_plural = 'Lignes d\'un panier client'
+        verbose_name = 'Commande Passer'
+        verbose_name_plural = 'Commande Passer'
 
     def total_ht(self):
         return round(self.product.price * float(self.quantity), 2)
@@ -245,3 +245,6 @@ class CartLine(models.Model):
     def total(self):
         return round((self.product.price * float(self.quantity)) +
                      (self.product.price * float(self.quantity) * self.product.vat.percent), 2)
+
+    def __str__(self):
+        return str(self.client.user)

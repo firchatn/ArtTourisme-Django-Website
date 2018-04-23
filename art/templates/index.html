@@ -130,11 +130,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="top_nav_right">
 			<div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-						<form action="" method="post" class="last"> 
+					<form action="" method="post" class="last"> 
 						<input type="hidden" name="cmd" value="_cart">
 						<input type="hidden" name="display" value="1">
 						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-					</form>  
+					</form> 
   
 						</div>
 		</div>
@@ -830,6 +830,15 @@ document.getElementsByClassName("minicart-submit").value= "Hide Filter";
 			});
 	</script>
 <!-- //here ends scrolling icon -->
+
+<script>
+	$(document).ready(function(){
+        $(".minicart-closer").click(function() {
+                paypal.minicart.reset();
+        });
+});
+</script>
+
 
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{% static 'js/bootstrap.js' %}"></script>
