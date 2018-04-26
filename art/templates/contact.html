@@ -359,7 +359,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 					</div>
 					<div class="col-md-6 contact-form">
 						<h4 class="white-w3ls">Contact <span>Form</span></h4>
-						<form action="#" method="post">
+						<form action="{% url 'art:reclamation' %}" method="post">
+							<!--
 							<div class="styled-input agile-styled-input-top">
 								<input type="text" name="Name" required="">
 								<label>Name</label>
@@ -379,7 +380,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 								<textarea name="Message" required=""></textarea>
 								<label>Message</label>
 								<span></span>
-							</div>	 
+							</div>	
+						--> 
+						{% csrf_token %}
+						{{ form3.as_p }} 
 							<input type="submit" value="SEND">
 						</form>
 					</div>

@@ -37,3 +37,11 @@ class AddAddress(ModelForm):
         model = Address
         fields = ['gender', 'first_name', 'last_name', 'company', 'address', 'additional_address',
                   'postcode', 'city', 'phone', 'mobilephone', 'fax', 'workphone']
+
+class IssuesForm(ModelForm):
+    name = forms.CharField(label='Votre nom', required=True)
+    desc = forms.CharField(label='Description', required=True)
+
+    class Meta:
+        model = Issues
+        fields = ['name', 'desc']

@@ -251,3 +251,23 @@ class CartLine(models.Model):
 
     def __str__(self):
         return str(self.client.user)
+
+
+
+
+class Issues(models.Model):
+    name = models.CharField(max_length=150, verbose_name="Nom du client")
+    desc = models.CharField(max_length=150, verbose_name="Description")
+    rec_date = models.DateField(verbose_name="Date de la reclamation", auto_now=True)
+
+
+    class Meta:
+        verbose_name = 'Réclamation'
+        verbose_name_plural = 'Reclamation'
+
+    def __unicode__(self):
+        return self.name
+
+    def __str(self):
+        return str(self.name)
+

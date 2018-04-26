@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect , get_object_or_404, redirect
-from art.forms import RegisterForm, RegisterFormUpdate, AddAddress, LoginForm
+from art.forms import RegisterForm, RegisterFormUpdate, AddAddress, LoginForm, IssuesForm
 from django.contrib.auth import authenticate, login, logout
 from art.models import *
 from django.views.decorators.csrf import csrf_exempt
@@ -8,10 +8,11 @@ from django.contrib.auth.decorators import login_required
 
 @csrf_exempt
 def savePanier(request):
+    i = 0
     print(request.user.username)
     if not request.user.username:
         return redirect('art:error')
-    user = User.objects.get(client=request.user.id)
+    user = User.objects.get(id=request.user.id)
     d = request.POST
     di = []
     for key, value in d.items():
@@ -23,9 +24,10 @@ def savePanier(request):
         if key.startswith('quantity_'):
             q = value
         if key.startswith('item_name_'):
+            i += 1
             #c.client = Client.objects.get(user=user)
             c.client = Client.objects.get(user=user)
-            c.product = Product.objects.get(name=value)
+            c.product  = Product.objects.get(name=value)
             c.quantity = d['quantity_'+ key[-1]]
             c.save()
     return redirect('art:index')
@@ -34,6 +36,7 @@ def index(request):
     products = Product.objects.select_related('vat').order_by('-id')[:8]
     form = RegisterForm()
     form2 = LoginForm()
+    form3 = IssuesForm()
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         form2 = LoginForm(request.POST)
@@ -115,11 +118,12 @@ def produits_view(request):
             else:
                 return redirect('art:error')
     products = Product.objects.select_related('vat').order_by('-id')[:8]
-    return render(request, 'produit.html', {'products': products ,'form': form, 'form2' : form2})
+    return render(request, 'produit.html', {'products': products ,'form': form, 'form2' : form2, 'form3' : form })
 
 def contact_view(request):
     form = RegisterForm()
     form2 = LoginForm()
+    form3 = IssuesForm()
     if request.method == 'POST':
         form = RegisterForm(request.POST)
         form2 = LoginForm(request.POST)
@@ -148,7 +152,7 @@ def contact_view(request):
             else:
                 return redirect('art:error')
 
-    return render(request, 'contact.html', {'form': form, 'form2' : form2})
+    return render(request, 'contact.html', {'form': form, 'form2' : form2, 'form3' : form3})
 
 def tunisie_view(request):
     form = RegisterForm()
@@ -570,3 +574,17 @@ def produits_view(request):
 
     products = Product.objects.all()
     return render(request, 'produit.html', {'products': products, 'form': form, 'form2' : form2})
+
+
+
+def reclamation(request):
+    if request.method == 'POST':
+        form = IssuesForm(request.POST)
+        if form.is_valid():
+            # On cree l utilisateur et le clie
+            issues = Issues()
+            issues.name = form.cleaned_data['name']
+            issues.desc = form.cleaned_data['desc']
+            issues.save()
+    return redirect('art:index')
+

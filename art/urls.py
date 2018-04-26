@@ -26,6 +26,7 @@ urlpatterns = [
     url(r'^produit/ceramique/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
     url(r'^produit/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
     url(r'^savePanier$', views.savePanier, name='savePanier'),
+    url(r'^reclamation$', views.reclamation, name='reclamation'),
 ]
 
 
