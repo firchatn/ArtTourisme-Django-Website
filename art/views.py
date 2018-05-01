@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from art.models import *
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
-
+import json
 
 @csrf_exempt
 def savePanier(request):
@@ -33,6 +33,12 @@ def savePanier(request):
     return redirect('art:index')
 
 def index(request):
+    # statistique
+    data = json.load(open("data.json"))
+    data["nb"] = data["nb"] + 1
+    with open('data.json', 'w') as outfile:
+        json.dump(data, outfile)
+        
     products = Product.objects.select_related('vat').order_by('-id')[:8]
     form = RegisterForm()
     form2 = LoginForm()
