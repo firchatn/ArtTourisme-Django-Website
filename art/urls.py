@@ -27,6 +27,7 @@ urlpatterns = [
     url(r'^produit/(?P<id>\w{0,50})/$', views.single_view, name='single_view'),
     url(r'^savePanier$', views.savePanier, name='savePanier'),
     url(r'^reclamation$', views.reclamation, name='reclamation'),
+    url(r'^facture$', views.facture, name='facture'),
 ]
 
 

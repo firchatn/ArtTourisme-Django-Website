@@ -1,7 +1,7 @@
 <html>
 <head>
   <meta charset="UTF-8"/>
-  <title>Facture José Roux</title>
+  <title>Facture </title>
   <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet" type="text/css"/>
   <style>
   
@@ -207,78 +207,94 @@ header:before {
   width: 0;
   box-shadow: 1px 1px 2px rgba(0,0,0,0.18);
 }
-
+#btn {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}
   
   </style>
 </head>
 <body>
   <header>
-    <h1>FACTURE
-      <h2>José Roux − Interactive Design</h2>
-    </h1>
+    <h1>FACTURE</h1>
   </header>
   <section class="flex">
     <dl>
       <dt>Facture #</dt>
-      <dd>20140603</dd>
+      <dd>001</dd>
       <dt>Date de facturation</dt>
-      <dd>03.06.2014</dd>
+      <dd id="datef"></dd>
     </dl>
   </section>
-  <section class="flex">
-    <dl class="bloc">
-      <dt>Facturé à:</dt>
-      <dd>
-        Company X &amp; Son Inc.<br>
-        2789 Some street,<br>
-        Big City, Québec, J3X 1J1
-        <dl>
-          <dt>Attn</dt>
-          <dd>Le Big Boss</dd>
-          <dt>Téléphone</dt>
-          <dd>(450) 555-2663</dd>
-          <dt>Courriel</dt>
-          <dd>bigboss@bigcompanylonglongemail.com</dd>
-        </dl>
-      </dd>
-    </dl>
-    <dl class="bloc">
-      <dt>Description de service:</dt>
-      <dd>Développement AIR</dd>
-      <dt>Période totale:</dt>
-      <dd>24 Mai au 2 Juin 2014</dd>
-    </dl>
-  </section>
+
   <table>
     <thead>
       <tr> 
-        <th>Période</th>
-        <th>Description</th>
-        <th>Heures</th>
+        <th>Id</th>
+
+        <th>Produit</th>
+        <th>Quantité</th>
         <th>Taux</th>
         <th>Montant</th>
       </tr>
     </thead>
     <tbody>
+      {%for i in lc%}
       <tr>
-        <td>24 Mai au 2 Juin</td>
-        <td>Dévelopement du jeu Tomatina</td>
-        <td>24&#8202;h</td>
-        <td>20&#8202;$/h</td>
-        <td>480&#8202;$</td>
+        <td>{{i.id}}</td>
+        <td>{{i.product.name}}</td>
+        <td>{{i.quantity}}</td>
+        
+        <td id="tva">{{i.product.vat.percent}}</td>
+
+        <td  class="ff" id="t">{{ i.quantity }} * {{ i.product.price}}</td>
       </tr>
+      {% endfor%}
     </tbody>
     <tfoot>
       <tr> 
-        <td colspan="3">− Faire les chèques payable au nom de moi −</td>
+        <td colspan="3">− Faire Le paiment doit etre en 15 jour comme max −</td>
         <td>Total:</td>
-        <td>480&#8202;$</td>
+        <td id="tt"></td>
       </tr>
     </tfoot>
   </table>
   <footer>
-    <p>Moi – Informatique − Développement WEB | <a href="http://joseroux.com">joseroux.com</a></p>
-    <p>1777 some street in the woods, Wentworth-Nord, Qc, J0T 1Y0 | Tél. 450-555-1000 | <a href="mailto:mail@me.com">mail@me.com</a></p>
+    <p>Merci pour votre commande</p>
+    <p>Tunisie, Sfax, Tunis | Tél. 71 000 000 | <a href="mailto:mail@me.com">dali@contact.com</a></p>
+    <br>
+    <button id="btn" onclick="window.print();">Inprimer Facture</button>
   </footer>
+
+
+  <script>
+var start = new Date();
+document.getElementById("datef").innerHTML = start;
+
+
+
+
+
+var cusid_ele = document.getElementsByClassName('ff');
+var res = document.getElementById("tt");
+var total = 0 ;
+for (var i = 0; i < cusid_ele.length; ++i) {
+    var item = cusid_ele[i];  
+
+    var r = eval( item.innerHTML) * eval(document.getElementById("tva").innerHTML);
+    total = total + r;
+    item.innerHTML= r;
+
+}
+res.innerHTML = total + " $";
+
+
+  </script>
 </body>
 </html>

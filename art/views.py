@@ -32,6 +32,17 @@ def savePanier(request):
             c.save()
     return redirect('art:index')
 
+def facture(request):
+    u = request.user
+    user = User.objects.get(id=u.id)
+
+    idd = Client.objects.get(id=u.id-2)
+
+    list_commande = CartLine.objects.filter(client=idd)
+
+    return render(request, 'facture.html' , {'lc' : list_commande})
+
+
 def index(request):
     # statistique
     data = json.load(open("data.json"))
