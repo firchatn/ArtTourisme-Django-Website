@@ -18,6 +18,9 @@ class Client(models.Model):
                                                   null=True,
                                                   verbose_name="Adresse de facturation par défaut"
                                                   )
+    adress = models.CharField(max_length=40)
+    zip = models.CharField(max_length=40)
+    phone = models.CharField(max_length=40)
 
     def __unicode__(self):
         return self.user.username + " (" + self.user.first_name + " " + self.user.last_name + ")"

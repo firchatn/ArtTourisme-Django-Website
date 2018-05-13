@@ -5,7 +5,6 @@
   <link href="https://fonts.googleapis.com/css?family=Nunito:300|Raleway:200,300" rel="stylesheet" type="text/css"/>
   <style>
   
-  /*** @media all  ***/
 * {
   box-sizing: border-box;
 }
@@ -41,7 +40,7 @@ header h1 {
 }
 body > * {
   width: 100%;
-  max-width: 7in;
+  max-width: 10in;
   margin: 3px auto;
   background: #f0f0f0;
   text-align: center;
@@ -223,6 +222,20 @@ header:before {
 <body>
   <header>
     <h1>FACTURE</h1>
+    {% for i in lc|slice:":1" %}
+   <h3> 
+    client  : {{i.client}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    telephone  : {{i.client.phone}}
+   </h3>
+   <h3> 
+    adresse  : {{i.client.adress}}
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    code postale  : {{i.client.zip}}
+   </h3>
+   {% endfor %}
+
+
   </header>
   <section class="flex">
     <dl>
@@ -239,6 +252,7 @@ header:before {
         <th>Id</th>
 
         <th>Produit</th>
+        <th>Prix Unitaire</th>
         <th>Quantité</th>
         <th>Taux</th>
         <th>Montant</th>
@@ -249,6 +263,7 @@ header:before {
       <tr>
         <td>{{i.id}}</td>
         <td>{{i.product.name}}</td>
+        <td>{{i.product.price}} $</td>
         <td>{{i.quantity}}</td>
         
         <td id="tva">{{i.product.vat.percent}}</td>
@@ -274,7 +289,7 @@ header:before {
 
 
   <script>
-var start = new Date();
+var start = new Date().toLocaleString();
 document.getElementById("datef").innerHTML = start;
 
 
@@ -287,9 +302,9 @@ var total = 0 ;
 for (var i = 0; i < cusid_ele.length; ++i) {
     var item = cusid_ele[i];  
 
-    var r = eval( item.innerHTML) * eval(document.getElementById("tva").innerHTML);
+    var r = eval( item.innerHTML) * eval(document.getElementById("tva").innerHTML)/10;
     total = total + r;
-    item.innerHTML= r;
+    item.innerHTML= r + " $";
 
 }
 res.innerHTML = total + " $";

@@ -34,9 +34,10 @@ def savePanier(request):
 
 def facture(request):
     u = request.user
+    print(u.id)
     user = User.objects.get(id=u.id)
 
-    idd = Client.objects.get(id=u.id-2)
+    idd = Client.objects.get(id=u.id-1)
 
     list_commande = CartLine.objects.filter(client=idd)
 
@@ -64,6 +65,9 @@ def index(request):
             user.set_password(form.cleaned_data['password'])
             user.save()
             client = Client(user_id=user.id)
+            client.phone = form.cleaned_data['telephone']
+            client.zip = form.cleaned_data['code_post']
+            client.adress = form.cleaned_data['adress']
             client.save()
 
             # On connecte le client

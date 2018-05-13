@@ -9,6 +9,9 @@ class RegisterForm(ModelForm):
     last_name = forms.CharField(label='Votre nom', required=True)
     email = forms.EmailField(label='Votre adresse e-mail', required=True)
     password = forms.CharField(widget=forms.PasswordInput, label='Votre mot de passe', required=True)
+    adress = forms.CharField(label='Votre adress', required=True)
+    telephone = forms.CharField(label='Votre telephone', required=True)
+    code_post = forms.CharField(label='Votre code postale', required=True)
 
     class Meta:
         model = User
